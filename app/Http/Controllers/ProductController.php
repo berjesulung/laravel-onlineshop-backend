@@ -37,7 +37,7 @@ class ProductController extends Controller
         $product->image = $filename;
         $product->save();
 
-        return redirect()->route('product.index')->with('success', 'Category added successfully');
+        return redirect()->route('product.index')->with('success', 'Product added successfully');
     }
     //edit
     public function edit($id)
@@ -72,7 +72,7 @@ class ProductController extends Controller
             $data = $request->all();
             $product->update($data);
         }
-        return redirect()->route('product.index')->with('success', 'Category updated successfully');
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
         // return redirect()->route('user.index');
 
 
@@ -84,6 +84,6 @@ class ProductController extends Controller
         $product = \App\Models\Product::findOrFail($id);
         Storage::delete('public/products/' . $product->image);
         $product->delete();
-        return redirect()->route('product.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully');
     }
 }

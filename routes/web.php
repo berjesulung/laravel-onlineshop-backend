@@ -28,4 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
     //product
     Route::resource('product', \App\Http\Controllers\ProductController::class);
+    //order
+    Route::resource('order', \App\Http\Controllers\OrderController::class);
 });

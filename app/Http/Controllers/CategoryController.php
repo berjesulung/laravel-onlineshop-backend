@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -40,15 +42,40 @@ class CategoryController extends Controller
     }
 
     //update
+    // public function update(Request $request, $id)
+    // {
+    //     $validated = $request->validate([
+    //         'name' => 'required|max:100',
+    //         'description' => 'required|max:255',
+
+    //     ]);
+
+    //     $category = \App\Models\Category::findOrFail($id);
+    //     $category->update($validated);
+
+    //     return redirect()->route('category.index')->with('success', 'Category updated successfully');
+    // }
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:100',
-        ]);
+        $request->validate([
+                    'name' => 'required|max:100',
+                    'description' => 'required|max:255',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
 
         $category = \App\Models\Category::findOrFail($id);
-        $category->update($validated);
+        if ($request->hasFile('image')) {
+            Storage::delete('public/categories/' . $category->image);
+            $filename = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public/categories', $filename);
+            $data = $request->except('image');
+            $data['image'] = $filename;
+            $category->update($data);
 
+        } else {
+            $data = $request->all();
+            $category->update($data);
+        }
         return redirect()->route('category.index')->with('success', 'Category updated successfully');
     }
 

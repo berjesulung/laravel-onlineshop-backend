@@ -73,7 +73,7 @@
                                                 </td>
                                                 <td>
                                                     <img src="{{ asset('storage/products/' . $product->image) }}"
-                                                        width="" />
+                                                        width="80" />
                                                 </td>
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>
