@@ -53,8 +53,6 @@
                                         <tr>
 
                                             <th>Name</th>
-                                            <th>Deskripsi</th>
-                                            <th>Image</th>
                                             <th>Created At</th>
                                             <th>Action</th>
                                         </tr>
@@ -62,11 +60,6 @@
                                             <tr>
 
                                                 <td>{{ $category->name }}
-                                                </td>
-                                                <td>{{ $category->description }}
-                                                </td>
-                                                <td><img src="{{ asset('storage/categories/' . $category->image) }}"
-                                                        width="80" />
                                                 </td>
 
                                                 <td>{{ $category->created_at }}</td>
